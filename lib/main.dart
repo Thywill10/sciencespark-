@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const ScienceApp());
+  runApp(const ScienceSpark());
 }
 
-class ScienceApp extends StatelessWidget {
-  const ScienceApp({super.key});
+class ScienceSpark extends StatelessWidget {
+  const ScienceSpark({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Science Spark",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("🔬 Science Spark"),
-        ),
-        body: const Center(
-          child: Text(
-            "Did you know?\n\nThe sky looks blue because Earth's atmosphere scatters blue light more than other colors.",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22),
-          ),
-        ),
+      title: 'ScienceSpark',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const HomeScreen(),
     );
   }
 }
