@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'facts_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,6 +18,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 20),
+
             const Text(
               "Welcome to ScienceSpark",
               textAlign: TextAlign.center,
@@ -25,23 +27,38 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             const SizedBox(height: 10),
+
             const Text(
               "Learn science in a simple and fun way.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
+
             const SizedBox(height: 40),
+
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FactsScreen(),
+                  ),
+                );
+              },
               child: const Text("Science Facts"),
             ),
+
             const SizedBox(height: 15),
+
             ElevatedButton(
               onPressed: () {},
               child: const Text("Quiz"),
             ),
+
             const SizedBox(height: 15),
+
             ElevatedButton(
               onPressed: () {},
               child: const Text("WAEC Syllabus"),
