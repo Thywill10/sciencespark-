@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
+import '../data/science_facts.dart';
+import '../services/favorites_service.dart';
 
-class FactsScreen extends StatelessWidget {
+class FactsScreen extends StatefulWidget {
   const FactsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final facts = [
-      "The Sun is a star.",
-      "Water boils at 100°C.",
-      "The Earth revolves around the Sun.",
-      "Plants make food through photosynthesis.",
-      "Light travels faster than sound.",
-    ];
+  State<FactsScreen> createState() => _FactsScreenState();
+}
 
+class _FactsScreenState extends State<FactsScreen> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Science Facts"),
       ),
       body: ListView.builder(
-        itemCount: facts.length,
+        itemCount: scienceFacts.length,
         itemBuilder: (context, index) {
+          final fact = scienceFacts[index];
+
           return Card(
             margin: const EdgeInsets.all(10),
-            child: ListTile(
-              leading: const Icon(Icons.science),
-              title: Text(facts[index]),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+            elevation: 4,
+            child: List

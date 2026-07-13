@@ -1,0 +1,17 @@
+const List<String> scienceFacts = [
+  "The Sun is a star.",
+  "Water boils at 100°C.",
+  "The Earth revolves around the Sun.",
+  "Plants make food through photosynthesis.",
+  "Light travels faster than sound.",
+  "The human body has 206 bones.",
+  "The heart pumps blood throughout the body.",
+  "Gravity keeps us on the Earth.",
+  "The Moon reflects sunlight.",
+  "DNA carries genetic information.",
+  "Sound cannot travel in a vacuum.",
+  "An octopus has three hearts.",
+  "The Pacific Ocean is the largest ocean on Earth.",
+  "Lightning is hotter than the surface of the Sun.",
+  "Honey never spoils.",
+];
