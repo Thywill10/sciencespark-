@@ -9,27 +9,25 @@ class AppOpenAdService {
       adUnitId: AdHelper.appOpenAdUnitId,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
-        onAdLoaded: (ad) {
+        onAdLoaded: (AppOpenAd ad) {
           _appOpenAd = ad;
         },
-        onAdFailedToLoad: (error) {
+        onAdFailedToLoad: (LoadAdError error) {
           _appOpenAd = null;
         },
       ),
-      orientation: AppOpenAd.orientationPortrait,
     );
   }
 
   static void showAd() {
     if (_appOpenAd == null) return;
 
-    _appOpenAd!.fullScreenContentCallback =
-        FullScreenContentCallback(
-      onAdDismissedFullScreenContent: (ad) {
+    _appOpenAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (AppOpenAd ad) {
         ad.dispose();
         loadAd();
       },
-      onAdFailedToShowFullScreenContent: (ad, error) {
+      onAdFailedToShowFullScreenContent: (AppOpenAd ad, AdError error) {
         ad.dispose();
         loadAd();
       },
