@@ -1,0 +1,17 @@
+const List<String> dailyFacts = [
+  "Honey never spoils. Archaeologists have found edible honey in ancient Egyptian tombs.",
+  "The human brain contains about 86 billion neurons.",
+  "Lightning is five times hotter than the surface of the Sun.",
+  "Bananas are naturally slightly radioactive because they contain potassium.",
+  "Water expands when it freezes.",
+  "Octopuses have three hearts.",
+  "Jupiter is so large that over 1,300 Earths could fit inside it.",
+  "A day on Venus is longer than a year on Venus.",
+  "The human body has 206 bones.",
+  "Sound cannot travel through space because there is no air.",
+  "The blue whale is the largest animal to have ever lived.",
+  "Earth is the only known planet known to support life.",
+  "Plants make their own food through photosynthesis.",
+  "The fastest land animal is the cheetah.",
+  "The Sun is about 4.6 billion years old.",
+];

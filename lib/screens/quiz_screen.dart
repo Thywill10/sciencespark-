@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/interstitial_ad_service.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -49,6 +50,9 @@ class _QuizScreenState extends State<QuizScreen> {
         currentQuestion++;
       });
     } else {
+      // Show interstitial ad when quiz finishes
+      InterstitialAdService.showAd();
+
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -60,13 +64,14 @@ class _QuizScreenState extends State<QuizScreen> {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
+
                 setState(() {
                   currentQuestion = 0;
                   score = 0;
                 });
               },
               child: const Text("Restart"),
-            )
+            ),
           ],
         ),
       );
@@ -92,9 +97,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             const SizedBox(height: 30),
-
             ...(question["answers"] as List<String>).map(
               (answer) => Padding(
                 padding: const EdgeInsets.only(bottom: 15),

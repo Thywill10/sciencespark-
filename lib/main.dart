@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-void main() {
+import 'screens/main_navigation.dart';
+import 'services/interstitial_ad_service.dart';
+import 'services/rewarded_ad_service.dart';
+import 'services/app_open_ad_service.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await MobileAds.instance.initialize();
+
+  // Load ads
+  AppOpenAdService.loadAd();
+  InterstitialAdService.loadAd();
+  RewardedAdService.loadAd();
+
   runApp(const ScienceSpark());
 }
 
@@ -16,7 +30,7 @@ class ScienceSpark extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const MainNavigation(),
     );
   }
 }

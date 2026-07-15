@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
+import '../data/daily_facts.dart';
+import '../widgets/banner_ad_widget.dart';
+
 import 'categories_screen.dart';
 import 'quiz_screen.dart';
 import 'search_screen.dart';
 import 'favorites_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,19 +30,23 @@ class HomeScreen extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => page,
+            PageRouteBuilder(
+              transitionDuration: const Duration(milliseconds: 400),
+              pageBuilder: (context, animation, secondaryAnimation) => page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
             ),
           );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 55,
-              color: color,
-            ),
+            Icon(icon, size: 55, color: color),
             const SizedBox(height: 12),
             Text(
               title,
@@ -53,45 +63,72 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final randomFact = dailyFacts[Random().nextInt(dailyFacts.length)];
+
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
-
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: const Text(
           "ScienceSpark",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(18),
-
         child: Column(
           children: [
-
             const SizedBox(height: 10),
+
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("👋", style: TextStyle(fontSize: 28)),
+                SizedBox(width: 8),
+                Text(
+                  "Welcome to ScienceSpark",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 15),
 
             const Text(
               "Explore • Learn • Discover",
               style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
               ),
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
 
             const Text(
-              "Your simple science learning companion",
+              "Discover amazing science facts,\nchallenge yourself with quizzes,\nand learn something new every day.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
+                height: 1.5,
               ),
             ),
 
@@ -103,15 +140,13 @@ class HomeScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(16),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-
-                    Row(
+                    const Row(
                       children: [
-                        Icon(Icons.lightbulb,
-                            color: Colors.orange),
+                        Icon(Icons.lightbulb, color: Colors.orange),
                         SizedBox(width: 8),
                         Text(
                           "Daily Science Fact",
@@ -123,13 +158,11 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
                     Text(
-                      "Did you know? Honey never spoils. Archaeologists have discovered edible honey in ancient Egyptian tombs.",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      randomFact,
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -143,9 +176,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
-
                 children: [
-
                   buildCard(
                     context,
                     Icons.science,
@@ -153,7 +184,6 @@ class HomeScreen extends StatelessWidget {
                     "Categories",
                     const CategoriesScreen(),
                   ),
-
                   buildCard(
                     context,
                     Icons.quiz,
@@ -161,7 +191,6 @@ class HomeScreen extends StatelessWidget {
                     "Quiz",
                     const QuizScreen(),
                   ),
-
                   buildCard(
                     context,
                     Icons.search,
@@ -169,7 +198,6 @@ class HomeScreen extends StatelessWidget {
                     "Search",
                     const SearchScreen(),
                   ),
-
                   buildCard(
                     context,
                     Icons.favorite,
@@ -181,11 +209,13 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            const BannerAdWidget(),
+
+            const SizedBox(height: 8),
+
             const Text(
               "ScienceSpark v1.0",
-              style: TextStyle(
-                color: Colors.grey,
-              ),
+              style: TextStyle(color: Colors.grey),
             ),
 
             const SizedBox(height: 10),
